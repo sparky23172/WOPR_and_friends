@@ -2,8 +2,8 @@ This program is designed to preform mass directory discovery via gobuster. This 
 The program will also look for a few basic file extensions (.csv,.db,.dbf,.log,.sql,.xml,.exe,.ppt,.pptx,.xls,.xlsx,.bak,.tmp,.doc,.docx,.txt,.pdf) by default.
 
 Requirements:
-    You will need to run this program on a Linux machine along with having Gobuster installed and in PATH.
+* You will need to run this program on a Linux machine along with having Gobuster installed and in PATH.
 
 Future Plans:
-    Use goroutines to allow for faster results
-    Changes to how the arguments function to allow for more customization
+* Use goroutines to allow for faster results
+* Changes to how the arguments function to allow for more customization
