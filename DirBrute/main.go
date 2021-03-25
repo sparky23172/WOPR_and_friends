@@ -94,6 +94,8 @@ func execute(ipAddress string, wordlist string, extensions string, writer *csv.W
 
         //Checks for extensions to look for with list
         if extensions != "" {
+        } else if (extensions == "None") {
+                extensions = "''"
         } else {
                 extensions = ".csv,.db,.dbf,.log,.sql,.xml,.exe,.ppt,.pptx,.xls,.xlsx,.bak,.tmp,.doc,.docx,.txt,.pdf"
         }
@@ -147,7 +149,7 @@ func main() {
 
         //Grabs flags
         wordlistPath := flag.String("w", "", "Path to wordlist")
-        extensions := flag.String("x", "", "Add different file extenstions not included by default ()")
+        extensions := flag.String("x", "", "Add different file extenstions not included by default (.csv,.db,.dbf,.log,.sql,.xml,.exe,.ppt,.pptx,.xls,.xlsx,.bak,.tmp,.doc,.docx,.txt,.pdf)\nUse 'None' if you do not want to use any extensions")
         csvIn := flag.String("I", "", "CSV file for injestion")
         csvOut := flag.String("O", "", "CSV file for exporting")
         debug := flag.Bool("d", false, "Turn Debugging on")
