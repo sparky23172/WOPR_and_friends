@@ -7,3 +7,7 @@ Requirements:
 Future Plans:
 * Use goroutines to allow for faster results
 * Changes to how the arguments function to allow for more customization
+
+Example Commands:
+* ./DirBrute.exe -I input.csv -O output.csv -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt 
+* ./DirBrute.exe -I input.csv -O output.csv -w /usr/share/SecLists/Discovery/Web-Content/api/api-seen-in-wild.txt -x None
