@@ -4,7 +4,7 @@ import urllib.parse as urlparse
 import argparse
 import threading
 import logging
-
+from bs4 import BeautifulSoup as bs4
 
 target_links = []
 
@@ -31,11 +31,20 @@ Returns: Argument's values
 
 
 def extract_links(url):
-    response = requests.get(url)
+    logging.debug("Crawling on {}".format(url))
+    headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64;rv:78.0) Gecko/20100101 Firefox/78.0'
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response:
+        logging.debug("[+] {}".format(bs4(response.content)))
     return re.findall('(?:href=")(.*?)"',response.content.decode(errors="ignore"))
 
 
 def crawl(url):
+	logging.debug("Starting to crawl on {}".format(url))
 	href_links = extract_links(url)
 	for link in href_links:
 		link = urlparse.urljoin(url, link)
@@ -47,11 +56,12 @@ def crawl(url):
 			print("[+] " + str(link))
 			crawl(link)
 
+
 def main():
     options = get_arg()
     if options.url:
         crawl(options.url)
-    if options.urls:
+    elif options.urls:
         f = open("options.urls", "r")
         urls = f.read()
         for url in urls:
@@ -59,6 +69,8 @@ def main():
              t1.start()
              t1.join()
         logging.debug("Complete!")
+    else:
+        logging.fatal("Url(s) not given. Please add -u or -U to give me a target")
 
 
 if __name__ == "__main__":
